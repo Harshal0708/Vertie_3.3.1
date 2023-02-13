@@ -1,5 +1,7 @@
 package com.vertie
 
+import com.vertie.data.user.User
+
 class Constants {
 
     companion object {
@@ -92,5 +94,15 @@ class Constants {
         //local storage data
         const val userList = "userData"
         const val proxyUserList = "userlist"
+
+        // ShardPrefrence
+        const val user = "user"
+
+        const val user_email = "user_email"
+        const val user_password = "user_password"
+        const val user_id = "user_id"
+        const val token = "token"
+        const val currentUser = "currentUser"
+
     }
 }

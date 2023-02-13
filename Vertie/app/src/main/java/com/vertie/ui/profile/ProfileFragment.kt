@@ -1,5 +1,6 @@
 package com.vertie.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.vertie.DashboardActivity
+import com.vertie.LoginActivity
 import com.vertie.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -32,6 +35,12 @@ class ProfileFragment : Fragment() {
         profileViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
         }
+
+        binding.btnLogout.setOnClickListener {
+            startActivity(Intent(activity, LoginActivity::class.java))
+            activity?.finish()
+        }
+
         return root
     }
 

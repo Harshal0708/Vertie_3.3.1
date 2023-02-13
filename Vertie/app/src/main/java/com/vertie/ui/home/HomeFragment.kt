@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.vertie.DashboardActivity
 import com.vertie.databinding.FragmentHomeBinding
+import com.vertie.javacode.activities.MeasurementIntroActivity
 import de.kenkou.sdk.headless.core.backend.AnonymousAuthTokenProvider
 import de.kenkou.sdk.headless.domain.model.OnboardingQuestionnaireException
 import de.kenkou.sdk.visual.KenkouSDKVisual
@@ -40,28 +41,28 @@ class HomeFragment : Fragment() {
 
         val measurement_tutorial: AppCompatButton = binding.measurementTutorial
         measurement_tutorial.setOnClickListener {
-//            startActivity(Intent(_binding, DashboardActivity::class.java))
+            startActivity(Intent(activity, MeasurementIntroActivity::class.java))
         }
 
         val testTokenProvider = AnonymousAuthTokenProvider.provide()
 
-//        KenkouSDKVisual.initialize(
-//            tokenProvider = testTokenProvider,
-//            appContext = applicationContext,
-//            partnerName = "Vertie",
-//            sdkKey = "Kenkou4Vertie!",
-//            locale = null,
-////            unitSystem = "",
-//            initializationCallback = { result ->
-//                result.onSuccess {
-//                    // SDK ready to work
-//                    Log.d("a","a")
-//                }.onFailure { exception ->
-//                    // Handle exception
-//                    Log.d("a","a")
-//                }
-//            }
-//        )
+        KenkouSDKVisual.initialize(
+            tokenProvider = testTokenProvider,
+            appContext = this.requireActivity(),
+            partnerName = "Vertie",
+            sdkKey = "Kenkou4Vertie!",
+            locale = null,
+//            unitSystem = "",
+            initializationCallback = { result ->
+                result.onSuccess {
+                    // SDK ready to work
+                    Log.d("a","a")
+                }.onFailure { exception ->
+                    // Handle exception
+                    Log.d("a","a")
+                }
+            }
+        )
 
 
         val measurementstartbutton: ConstraintLayout = binding.measurementstartbutton
@@ -81,7 +82,7 @@ class HomeFragment : Fragment() {
     private fun startFullMeasurement() {
         try {
 //            activity?.let {
-//            KenkouSDKVisual.presentMeasurement(this)
+            KenkouSDKVisual.presentMeasurement(this.requireActivity())
 //            }
         } catch (e: OnboardingQuestionnaireException) {
             showQuestionnaireErrorPopup()
@@ -89,17 +90,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun showQuestionnaireErrorPopup() {
-//        AlertDialog.Builder(this)
-//            .setTitle("Measurement Stopped with error")
-//            .setMessage("Onboarding questionnaire hasn't been completed.")
-//            .setPositiveButton("Open questionnaire") { dialog, which ->
-////                OnboardingQuestionnaireAnswersModel(1994,1,127.00,69.00, System.currentTimeMillis(),12.12)
-//                KenkouSDKVisual.presentOnboardingQuestionnaire(this)
-//            }
-//            .setNegativeButton("Close") { dialog, which ->
-//                dialog.dismiss()
-//            }
-//            .show()
+        AlertDialog.Builder(this.requireActivity())
+            .setTitle("Measurement Stopped with error")
+            .setMessage("Onboarding questionnaire hasn't been completed.")
+            .setPositiveButton("Open questionnaire") { dialog, which ->
+//                OnboardingQuestionnaireAnswersModel(1994,1,127.00,69.00, System.currentTimeMillis(),12.12)
+                KenkouSDKVisual.presentOnboardingQuestionnaire(this.requireActivity())
+            }
+            .setNegativeButton("Close") { dialog, which ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
 }

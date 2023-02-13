@@ -1,6 +1,7 @@
 package com.vertie
 
 import android.os.Bundle
+import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -15,7 +16,23 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setSupportActionBar()
+
+//        window.setFlags(
+//            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//            WindowManager.LayoutParams.FLAG_FULLSCREEN
+//        )
+
+        if (supportActionBar != null) {
+            supportActionBar!!.hide()
+        }
+
+        // try block to hide Action bar
+//        try {
+//            this.supportActionBar!!.hide()
+//        } // catch block to handle NullPointerException
+//        catch (e: NullPointerException) {
+//        }
+
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
